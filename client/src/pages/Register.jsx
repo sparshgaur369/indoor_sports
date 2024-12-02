@@ -26,65 +26,117 @@ function Register() {
     });
   };
 
-  const onUpload = async (element) => {
-    setLoading(true);
-    if (element.type === "image/jpeg" || element.type === "image/png") {
-      const data = new FormData();
-      data.append("file", element);
-      data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET);
-      data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
-      fetch(process.env.REACT_APP_CLOUDINARY_BASE_URL, {
-        method: "POST",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => setFile(data.url.toString()));
-      setLoading(false);
-    } else {
-      setLoading(false);
-      toast.error("Please select an image in jpeg or png format");
-    }
-  };
+  // const onUpload = async (element) => {
+  //   setLoading(true);
+  //   if (element.type === "image/jpeg" || element.type === "image/png") {
+  //     const data = new FormData();
+  //     data.append("file", element);
+  //     data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET);
+  //     data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
+  //     fetch(process.env.REACT_APP_CLOUDINARY_BASE_URL, {
+  //       method: "POST",
+  //       body: data,
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => setFile(data.url.toString()));
+  //     setLoading(false);
+  //   } else {
+  //     setLoading(false);
+  //     toast.error("Please select an image in jpeg or png format");
+  //   }
+  // };
+
+  // const formSubmit = async (e) => {
+  //   try {
+  //     e.preventDefault();
+
+  //     if (loading) return;
+  //     if (file === "") return;
+
+  //     const { firstname, lastname, email, password, confpassword } =
+  //       formDetails;
+  //     if (!firstname || !lastname || !email || !password || !confpassword) {
+  //       return toast.error("Input field should not be empty");
+  //     } else if (firstname.length < 3) {
+  //       return toast.error("First name must be at least 3 characters long");
+  //     } else if (lastname.length < 3) {
+  //       return toast.error("Last name must be at least 3 characters long");
+  //     } else if (password.length < 5) {
+  //       return toast.error("Password must be at least 5 characters long");
+  //     } else if (password !== confpassword) {
+  //       return toast.error("Passwords do not match");
+  //     }
+
+  //     await toast.promise(
+  //       axios.post("/user/register", {
+  //         firstname,
+  //         lastname,
+  //         email,
+  //         password,
+  //         pic: file,
+  //       }),
+  //       {
+  //         pending: "Registering user...",
+  //         success: "User registered successfully",
+  //         error: "Unable to register user",
+  //         loading: "Registering user...",
+  //       }
+  //     );
+  //     return navigate("/login");
+  //   } catch (error) {}
+  // };
+
 
   const formSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (loading) return; // Prevent submitting if already loading
+  
+    const { firstname, lastname, email, password, confpassword } = formDetails;
+  
+    // Validate form fields
+    if (!firstname || !lastname || !email || !password || !confpassword) {
+      return toast.error("Input field should not be empty");
+    } else if (firstname.length < 3) {
+      return toast.error("First name must be at least 3 characters long");
+    } else if (lastname.length < 3) {
+      return toast.error("Last name must be at least 3 characters long");
+    } else if (password.length < 5) {
+      return toast.error("Password must be at least 5 characters long");
+    } else if (password !== confpassword) {
+      return toast.error("Passwords do not match");
+    }
+  
     try {
-      e.preventDefault();
-
-      if (loading) return;
-      if (file === "") return;
-
-      const { firstname, lastname, email, password, confpassword } =
-        formDetails;
-      if (!firstname || !lastname || !email || !password || !confpassword) {
-        return toast.error("Input field should not be empty");
-      } else if (firstname.length < 3) {
-        return toast.error("First name must be at least 3 characters long");
-      } else if (lastname.length < 3) {
-        return toast.error("Last name must be at least 3 characters long");
-      } else if (password.length < 5) {
-        return toast.error("Password must be at least 5 characters long");
-      } else if (password !== confpassword) {
-        return toast.error("Passwords do not match");
-      }
-
+      setLoading(true); // Start loading
+  
+      // Sending user registration request to server (without pic)
       await toast.promise(
         axios.post("/user/register", {
           firstname,
           lastname,
           email,
           password,
-          pic: file,
         }),
         {
           pending: "Registering user...",
           success: "User registered successfully",
           error: "Unable to register user",
-          loading: "Registering user...",
         }
       );
-      return navigate("/login");
-    } catch (error) {}
+  
+      // On success, navigate to login page
+      navigate("/login");
+  
+    } catch (error) {
+      // Handle the error if the request fails
+      console.error("Error during registration:", error);
+      toast.error("Registration failed. Please try again.");
+    } finally {
+      setLoading(false); // Stop loading after registration attempt
+    }
   };
+  
 
   return (
     <section className="register-section flex-center">
@@ -118,13 +170,13 @@ function Register() {
             value={formDetails.email}
             onChange={inputChange}
           />
-          <input
+          {/* <input
             type="file"
             onChange={(e) => onUpload(e.target.files[0])}
             name="profile-pic"
             id="profile-pic"
             className="form-input"
-          />
+          /> */}
           <input
             type="password"
             name="password"

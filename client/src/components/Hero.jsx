@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../images/heroimg.jpg";
+import image from "../images/picture1.jpg";
 import "../styles/hero.css";
 
 const Hero = () => {
@@ -7,13 +7,11 @@ const Hero = () => {
     <section className="hero">
       <div className="hero-content">
         <h1>
-          Your Health, <br />
-          Our Responsibility
+          Your Game, <br />
+          Our Priority
         </h1>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-          tenetur doloremque molestias repellat minus asperiores in aperiam
-          dolor, quaerat praesentium.
+        Experience indoor sports like never before, with convenient access to high-quality, well-maintained facilities. Whether you're playing for fitness or fun, we prioritize your well-being and provide an environment that encourages growth, competition, and personal achievement.
         </p>
       </div>
       <div className="hero-img">

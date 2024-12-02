@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
   {
-    userId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    doctorId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // userId: {
+    //   type: mongoose.SchemaTypes.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
+    // doctorId: {
+    //   type: mongoose.SchemaTypes.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
     date: {
       type: String,
       required: true,
@@ -20,10 +20,10 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
-    status: {
-      type: String,
-      default: "Pending",
-    },
+    // status: {
+    //   type: String,
+    //   default: "Pending",
+    // },
   },
   {
     timestamps: true,

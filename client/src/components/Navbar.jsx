@@ -29,14 +29,14 @@ const Navbar = () => {
     <header>
       <nav className={iconActive ? "nav-active" : ""}>
         <h2 className="nav-logo">
-          <NavLink to={"/"}>HealthBooker</NavLink>
+          <NavLink to={"/"}>IndoorSports</NavLink>
         </h2>
         <ul className="nav-links">
           <li>
             <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
-            <NavLink to={"/doctors"}>Doctors</NavLink>
+            <NavLink to={"/sports"}>Sports</NavLink>
           </li>
           {token && user.isAdmin && (
             <li>
@@ -45,15 +45,15 @@ const Navbar = () => {
           )}
           {token && !user.isAdmin && (
             <>
-              <li>
+              {/* <li>
                 <NavLink to={"/appointments"}>Appointments</NavLink>
-              </li>
+              </li> */}
               <li>
-                <NavLink to={"/notifications"}>Notifications</NavLink>
+                <NavLink to={"/notifications"}>Your Slots</NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to={"/applyfordoctor"}>Apply for doctor</NavLink>
-              </li>
+              </li> */}
               <li>
                 <HashLink to={"/#contact"}>Contact Us</HashLink>
               </li>

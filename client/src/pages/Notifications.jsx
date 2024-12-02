@@ -34,7 +34,7 @@ const Notifications = () => {
         <Loading />
       ) : (
         <section className="container notif-section">
-          <h2 className="page-heading">Your Notifications</h2>
+          <h2 className="page-heading">Your Slots</h2>
 
           {notifications.length > 0 ? (
             <div className="notifications">
@@ -43,8 +43,8 @@ const Notifications = () => {
                   <tr>
                     <th>S.No</th>
                     <th>Content</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    {/* <th>Date</th>
+                    <th>Time</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -53,8 +53,8 @@ const Notifications = () => {
                       <tr key={ele?._id}>
                         <td>{i + 1}</td>
                         <td>{ele?.content}</td>
-                        <td>{ele?.updatedAt.split("T")[0]}</td>
-                        <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
+                        {/* <td>{ele?.updatedAt.split("T")[0]}</td>
+                        <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td> */}
                       </tr>
                     );
                   })}

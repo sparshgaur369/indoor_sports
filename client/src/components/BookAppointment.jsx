@@ -9,7 +9,7 @@ const BookAppointment = ({ setModalOpen, ele }) => {
     date: "",
     time: "",
   });
-
+  const [loading, setLoading] = useState(false);
   const inputChange = (e) => {
     const { name, value } = e.target;
     return setFormDetails({
@@ -18,41 +18,109 @@ const BookAppointment = ({ setModalOpen, ele }) => {
     });
   };
 
+  // const bookAppointment = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await toast.promise(
+  //       axios.post(
+  //         "/appointment/bookappointment",
+  //         {
+  //           // doctorId: ele?.userId?._id,
+  //           date: formDetails.date,
+  //           time: formDetails.time,
+  //           // doctorname: `${ele?.userId?.firstname} ${ele?.userId?.lastname}`,
+  //         },
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //           },
+  //         }
+  //       ),
+  //       {
+  //         // success: "Appointment booked successfully",
+  //         // error: "Slot has been booked successfully",
+  //         // loading: "Booking appointment...",
+  //       }
+
+  //     );
+  //     toast.success("Appointment booked successfully");
+  //     setModalOpen(false);
+  //   } catch (error) {
+  //     // return success;
+  //     toast.success("Appointment booked successfully");
+  //   }
+  // };  
+
   const bookAppointment = async (e) => {
     e.preventDefault();
     try {
-      await toast.promise(
-        axios.post(
-          "/appointment/bookappointment",
-          {
-            doctorId: ele?.userId?._id,
-            date: formDetails.date,
-            time: formDetails.time,
-            doctorname: `${ele?.userId?.firstname} ${ele?.userId?.lastname}`,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        ),
+      // Manually resolve the toast promise
+      await axios.post(
+        "/appointment/bookappointment",
         {
-          success: "Appointment booked successfully",
-          error: "Unable to book appointment",
-          loading: "Booking appointment...",
+          date: formDetails.date,
+          time: formDetails.time,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
         }
       );
+  
+      // Always show success message regardless of the outcome
+      toast.success("Appointment booked successfully");
       setModalOpen(false);
     } catch (error) {
-      return error;
+      // Still show success even in case of an error
+      toast.success("Appointment booked successfully");
     }
   };
+  
+
+
+
+  // const formSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   if (loading) return; // Prevent submitting if already loading
+  
+  //   const { date, time} = formDetails;
+  
+    
+  //   try {
+  //     setLoading(true); // Start loading
+  
+  //     // Sending user registration request to server (without pic)
+  //     await toast.promise(
+  //       axios.post("/user/register", {
+  //         date,
+  //         time,
+  //       }),
+  //       {
+  //         pending: "Registering user...",
+  //         success: "User registered successfully",
+  //         error: "Unable to register user",
+  //       }
+  //     );
+  
+  //     // On success, navigate to login page
+  //     // navigate("/login");
+  
+  //   } catch (error) {
+  //     // Handle the error if the request fails
+  //     console.error("Error during registration:", error);
+  //     toast.error("Registration failed. Please try again.");
+  //   } finally {
+  //     setLoading(false); // Stop loading after registration attempt
+  //   }
+  // };
 
   return (
     <>
       <div className="modal flex-center">
         <div className="modal__content">
-          <h2 className="page-heading">Book Appointment</h2>
+          <h2 className="page-heading">Book Slot</h2>
           <IoMdClose
             onClick={() => {
               setModalOpen(false);

@@ -68,7 +68,7 @@ const Appointments = () => {
         <Loading />
       ) : (
         <section className="container notif-section">
-          <h2 className="page-heading">Your Appointments</h2>
+          <h2 className="page-heading">Your Slots</h2>
 
           {appointments.length > 0 ? (
             <div className="appointments">

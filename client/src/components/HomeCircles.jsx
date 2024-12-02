@@ -8,7 +8,7 @@ const HomeCircles = () => {
       <div className="circle">
         <CountUp
           start={0}
-          end={1000}
+          end={2000}
           delay={0}
           enableScrollSpy={true}
           scrollSpyDelay={500}
@@ -22,7 +22,7 @@ const HomeCircles = () => {
         <span className="circle-name">
           Satisfied
           <br />
-          Patients
+          Players
         </span>
       </div>
       <div className="circle">
@@ -40,15 +40,15 @@ const HomeCircles = () => {
           )}
         </CountUp>
         <span className="circle-name">
-          Verified
+          Managed 
           <br />
-          Doctors
+          Events
         </span>
       </div>
       <div className="circle">
         <CountUp
           start={0}
-          end={75}
+          end={10}
           delay={0}
           enableScrollSpy={true}
           scrollSpyDelay={500}
@@ -60,9 +60,9 @@ const HomeCircles = () => {
           )}
         </CountUp>
         <span className="circle-name">
-          Specialist
+          Specialized
           <br />
-          Doctors
+          Sports facilities
         </span>
       </div>
     </section>

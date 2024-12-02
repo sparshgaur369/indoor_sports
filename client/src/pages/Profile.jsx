@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import fetchData from "../helper/apiCall";
 import jwt_decode from "jwt-decode";
+import Contact from "../components/Contact";
+import AboutUs from "../components/AboutUs";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
+import HomeCircles from "../components/HomeCircles";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -119,7 +125,10 @@ function Profile() {
       {loading ? (
         <Loading />
       ) : (
+        <>
+        <Navbar />
         <section className="register-section flex-center">
+          
           <div className="profile-container flex-center">
             <h2 className="form-heading">Profile</h2>
             <img
@@ -224,6 +233,8 @@ function Profile() {
             </form>
           </div>
         </section>
+        <Footer />
+        </>
       )}
     </>
   );

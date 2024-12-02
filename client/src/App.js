@@ -39,7 +39,7 @@ function App() {
             element={<Home />}
           />
           <Route
-            path="/doctors"
+            path="/sports"
             element={<Doctors />}
           />
           <Route
